@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import {Routes,Route,Link,Outlet} from 'react-router-dom';
 
 function Encabezado(){
   return(
     <header>
       <nav className="nav">
-        <span className="nav-link"><Link to="/">Home</Link></span>
+        <span className="nav-link"><Link to="/">Menu</Link></span>
         <span className="nav-link"><Link to="/puntajes">Puntajes</Link></span>        
       </nav>      
     </header>
@@ -43,9 +43,34 @@ function Error404(){
 }
 
 function Home(){
+  //Inicialización
+  //const [numCartas,setNumCartas]=useState(2)
+  //const [jugador,setJugador]=useState('')
+  //Constructor en el componente de tipo función
+  const [state,setState]=useState({
+    numCartas:2,
+    jugador:'',
+    turno:''
+  })
+
+  //ComponentDidMount
+  useEffect(()=>{
+    console.log("ComponentDidMount en componente función")
+  },[])
+
+  //ComponentDidUpdate
+  useEffect(()=>{
+    if(state.jugador!==''){
+      console.log("ComponentDidUpdate en componente función")
+    }
+  })
+  //render
+  console.log(state)
   return(
     <div>
       <h1>Home</h1>
+      <input value={state.jugador} onChange={(e)=>setState({...state,jugador:e.target.value})}></input>
+      <p>Número de cartas: {state.numCartas} del jugador: {state.jugador}</p>
     </div>
   )
 }
@@ -64,8 +89,15 @@ class Juego extends React.Component{
   constructor(){
     super()
     this.state={
-      info:null
+      info:null,
+      jugador:"",
+      contador:0,
+      numCartas:2
     }
+  }
+
+  componentDidUpdate(){
+    console.log("compDidUpdate")
   }
 
   componentDidMount(){
@@ -83,6 +115,7 @@ class Juego extends React.Component{
         })
   }
 
+  
   async comunica(info){
     //Consumiendo el servicio POST  
     const respuesta = await fetch('http://localhost:8080/carta',{

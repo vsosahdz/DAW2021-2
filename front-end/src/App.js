@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {Routes,Route,Link,Outlet} from 'react-router-dom';
+import FormularioCarta from './components/FormularioCarta';
 
 function Encabezado(){
   return(
@@ -138,6 +139,7 @@ class Juego extends React.Component{
     return(
       <div>
         <h1>Juego</h1>
+        <FormularioCarta/>
        <button type="button" onClick={this.comunica.bind(this,"hola")} className="btn btn-primary">Consume POST</button>
       </div>
     )

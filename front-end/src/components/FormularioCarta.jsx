@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 function FormularioCarta(props){
     //Inicialización (constructor)
@@ -6,10 +6,26 @@ function FormularioCarta(props){
         mazo:"Corazones",
         descripcion:'',
         valor:''
-    })
+    })    
+    //ComponentDidMount
+    useEffect(()=>{
+        console.log("ComponentDidMount en componente función")
+        localStorage.setItem('nombre','Corazones')
+        sessionStorage.setItem('sesion','activa')
 
-    //render
+    },[])
+
+    //ComponentDidUpdate
+    useEffect(()=>{
+        if(state.descripcion!==''){
+          console.log("ComponentDidUpdate en componente función")
+          console.log(localStorage.getItem('nombre'))
+          console.log(sessionStorage.getItem('session'))
+          
+        }
+    })
     console.log(state)
+    //render
     return(
         <div className="card">
                 <form className="card-body" onSubmit={(e)=>e.preventDefault()}>

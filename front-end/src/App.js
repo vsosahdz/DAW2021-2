@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Routes,Route,Link,Outlet} from 'react-router-dom';
 import FormularioCarta from './components/FormularioCarta';
 
+
 function Encabezado(){
   return(
     <header>
